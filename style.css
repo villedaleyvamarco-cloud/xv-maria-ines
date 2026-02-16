@@ -1,0 +1,304 @@
+/* === Variables de Color (Tema Rose Gold/Rosa) === */
+:root {
+    --color-primary: #B76E79; /* Color Rose Gold principal */
+    --color-secondary: #FFC0CB; /* Rosa pastel suave */
+    --color-bg-light: #FFFBFB; /* Fondo crema/casi blanco */
+    --color-text-dark: #5A5A5A; /* Gris suave para texto */
+    --color-white: #FFFFFF;
+    --font-fancy: 'Great Vibes', cursive; /* Fuente para títulos */
+    --font-body: 'Montserrat', sans-serif; /* Fuente para texto legible */
+}
+
+body, html {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--color-text-dark);
+    background-color: var(--color-bg-light);
+    scroll-behavior: smooth;
+}
+
+/* === Títulos Elegantes === */
+h1, h2, .fancy-title {
+    font-family: var(--font-fancy);
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+/* === Sección Principal (Hero) === */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-white);
+    overflow: hidden;
+}
+
+#bg-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    /* Filtro opcional: si tu video es muy oscuro, esto lo aclara un poco y le da tono rosa */
+    /* filter: brightness(1.2) sepia(30%) hue-rotate(320deg) saturate(1.5); */
+}
+
+.overlay {
+    /* Degradado suave de rosa a transparente en lugar de negro sólido */
+    background: linear-gradient(to bottom, rgba(183, 110, 121, 0.3), rgba(0, 0, 0, 0.6));
+    padding: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.main-title { font-size: 5rem; color: var(--color-secondary); text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+.name-title { font-size: 3.5rem; }
+.sub-title { font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; }
+
+/* === Contenedores Generales === */
+.section-container {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--color-white);
+}
+
+.alt-bg {
+    background-color: var(--color-bg-light);
+    border-top: 1px solid var(--color-secondary);
+    border-bottom: 1px solid var(--color-secondary);
+}
+
+.fancy-title {
+    font-size: 3rem;
+    color: var(--color-primary);
+}
+
+.details-text {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+/* === Temporizador Mejorado === */
+#timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.time-box {
+    display: flex;
+    flex-direction: column;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-bg-light);
+    padding: 15px 25px;
+    border-radius: 15px; /* Bordes redondeados suaves */
+    box-shadow: 0 5px 15px rgba(183, 110, 121, 0.15); /* Sombra rosa suave */
+}
+
+.time-box small {
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--color-text-dark);
+    font-family: var(--font-body);
+}
+
+/* === Botón Temático === */
+.btn-theme {
+    display: inline-block;
+    padding: 15px 40px;
+    /* Degradado Rose Gold */
+    background: linear-gradient(45deg, var(--color-primary), #d4af37);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    margin-top: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(183, 110, 121, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.btn-theme:hover {
+    transform: translateY(-3px); /* Efecto de elevación al pasar el mouse */
+}
+
+/* === Estilos del Mapa === */
+.map-frame-container {
+    margin-top: 30px;
+    border-radius: 20px;
+    overflow: hidden; /* Para que el iframe respete los bordes redondeados */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 3px solid var(--color-secondary); /* Borde rosa delgado */
+}
+
+.map-frame-container iframe {
+    display: block; /* Elimina espacios fantasma debajo del iframe */
+}
+
+/* Ajustes para celulares */
+@media (max-width: 768px) {
+    .main-title { font-size: 3.5rem; }
+    .name-title { font-size: 2.5rem; }
+    .time-box { font-size: 1.8rem; padding: 10px 15px; }
+}
+
+/* =========================================
+   NUEVOS ESTILOS PARA MAPAS DIVIDIDOS Y BOTÓN FINAL
+   ========================================= */
+
+/* Títulos más pequeños para dentro de las tarjetas */
+.fancy-title-small {
+    font-family: var(--font-fancy);
+    font-size: 2.2rem;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.details-text-small {
+    font-size: 1rem;
+    margin: 5px 0 15px 0;
+    color: #888;
+}
+
+/* Contenedor flexible que pone una tarjeta al lado de la otra */
+.details-split-container {
+    display: flex;
+    justify-content: center; /* Centrados horizontalmente */
+    gap: 30px; /* Espacio entre las dos tarjetas */
+    margin-top: 30px;
+    flex-wrap: wrap; /* Permite que bajen si no caben */
+}
+
+/* El diseño de cada tarjeta (Misa y Salón) */
+.detail-card {
+    background: var(--color-white);
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(183, 110, 121, 0.15); /* Sombra suave rosa */
+    border: 2px solid rgba(255, 192, 203, 0.5); /* Borde rosa sutil */
+    
+    /* Tamaño: Crecen para ocupar espacio, pero no más de 550px cada una */
+    flex: 1 1 300px; 
+    max-width: 550px; 
+}
+
+/* Contenedor para los mapas más pequeños dentro de las tarjetas */
+.map-frame-small {
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 15px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    border: 1px solid var(--color-secondary);
+}
+.map-frame-small iframe {
+    display: block;
+    /* La altura ahora se controla en el HTML (height="250") */
+}
+
+/* Sección final específica para el botón */
+.final-rsvp {
+    background-color: var(--color-bg-light); /* Fondo crema */
+    padding-top: 20px;
+    padding-bottom: 80px; /* Espacio extra al final de la página */
+}
+
+/* AJUSTES PARA CELULAR ACTUALIZADOS */
+@media (max-width: 768px) {
+    /* ... Tus ajustes anteriores ... */
+
+    /* En celular, forzamos que las tarjetas estén en columna (una sobre otra) */
+    .details-split-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    /* Que ocupen casi todo el ancho en celular */
+    .detail-card {
+        width: 90%;
+        max-width: none; /* Quitamos el límite de ancho en celular */
+    }
+}
+
+/* =========================================
+   ESTILOS DEL MODAL (VENTANA EMERGENTE)
+   ========================================= */
+
+/* El fondo oscuro que cubre toda la pantalla */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; 
+    z-index: 1000; /* Encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.6); /* Fondo negro semitransparente */
+    backdrop-filter: blur(5px); /* Efecto borroso en el fondo */
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s;
+}
+
+/* La cajita blanca del formulario */
+.modal-content {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px; /* No muy ancho en PC */
+    position: relative;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    border: 2px solid var(--color-secondary);
+}
+
+/* Inputs y Selects */
+input[type="text"], select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 20px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box; /* Para que el padding no rompa el ancho */
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background-color: #fafafa;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background-color: #fff;
+}
+
+/* Botón de cerrar (X) */
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.close-btn:hover {
+    color: var(--color-primary);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Ajuste para que el modal se vea bien flexbox */
+.show-modal {
+    display: flex !important;
+}

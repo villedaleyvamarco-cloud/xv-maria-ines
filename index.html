@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV - Maria Ines Villeda Leyva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section class="hero">
+        <video autoplay muted loop id="bg-video">
+            <source src="assets/video-fondo.mp4" type="video/mp4">
+        </video>
+        <div class="overlay">
+            <p class="sub-title" data-aos="fade-down">Te invito a celebrar mis</p>
+            <h1 class="main-title" data-aos="zoom-in" data-aos-delay="300">XV Años</h1>
+            <h2 class="name-title" data-aos="fade-up" data-aos-delay="600">Maria Ines Villeda Leyva</h2>
+        </div>
+    </section>
+
+    <section class="section-container" data-aos="fade-up">
+        <h2 class="fancy-title">La Cuenta Regresiva</h2>
+        <div id="timer">
+            <div class="time-box"><span id="days">00</span><small>Días</small></div> :
+            <div class="time-box"><span id="hours">00</span><small>Hrs</small></div> :
+            <div class="time-box"><span id="minutes">00</span><small>Min</small></div>
+        </div>
+    </section>
+
+    <section class="section-container alt-bg" data-aos="fade-up">
+        <h2 class="fancy-title">Detalles del Evento</h2>
+        
+        <div class="details-split-container">
+            
+            <div class="detail-card">
+                <h3 class="fancy-title-small">Ceremonia Religiosa</h3>
+                <p class="details-text">Parroquia Cristo Rey</p>
+                <p class="details-text-small">12:00 Horas</p>
+                
+                <div class="map-frame-small">
+                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470.4387915333681!2d-99.20127583982266!3d19.390344012860105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d201ce2222011d%3A0xd6404adfce6de1da!2sParroquia%20de%20Cristo%20Rey%20TACUBAYA!5e0!3m2!1ses-419!2smx!4v1771226939296!5m2!1ses-419!2smx" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            <div class="detail-card">
+                <h3 class="fancy-title-small">Fiesta</h3>
+                <p class="details-text">Ubicacion del Evento</p>
+                <p class="details-text-small">15:00 Horas - Código de Vestir: N/A</p>
+                
+                <div class="map-frame-small">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.8684677869!2d-99.20382582422765!3d19.374847181892314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d20031d98e76c3%3A0xdabf77b5e7032b88!2sCda.%20Rosa%20Verde%2094%2C%20El%20Alfalfar%2C%20%C3%81lvaro%20Obreg%C3%B3n%2C%2001470%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1771227547886!5m2!1ses-419!2smx" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section-container final-rsvp" data-aos="zoom-in">
+        <p class="details-text">Esperamos contar con tu presencia</p>
+        <button onclick="openModal()" class="btn-theme" style="border: none; cursor: pointer;">
+        Confirmar Asistencia
+    </button>
+    </section>
+
+    <div id="rsvpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 class="fancy-title-small" style="text-align: center;">Confirmar Asistencia</h2>
+            <p class="details-text-small" style="text-align: center;">Por favor ingresa tus datos</p>
+
+            <form id="rsvpForm" onsubmit="sendToWhatsapp(event)">
+                
+                <label for="guestName">Nombre Completo:</label>
+                <input type="text" id="guestName" placeholder="Ej. Familia Pérez López" required>
+
+                <label for="guestCount">Número de Lugares:</label>
+                <select id="guestCount" required>
+                    <option value="" disabled selected>Selecciona cantidad</option>
+                    <option value="2">2 Personas</option>
+                    <option value="3">3 Personas</option>
+                    <option value="4">4 Personas</option>
+                </select>
+
+                <button type="submit" class="btn-theme" style="width: 100%; border: none; cursor: pointer;">
+                    Enviar por WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
