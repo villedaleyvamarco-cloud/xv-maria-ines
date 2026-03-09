@@ -1,304 +1,1245 @@
-/* === Variables de Color (Tema Rose Gold/Rosa) === */
+/* =============================================
+   VARIABLES DE COLOR Y CONFIGURACIÓN GLOBAL
+   🎨 AQUÍ CAMBIAS LOS COLORES PRINCIPALES
+   ============================================= */
 :root {
-    --color-primary: #B76E79; /* Color Rose Gold principal */
-    --color-secondary: #FFC0CB; /* Rosa pastel suave */
-    --color-bg-light: #FFFBFB; /* Fondo crema/casi blanco */
-    --color-text-dark: #5A5A5A; /* Gris suave para texto */
-    --color-white: #FFFFFF;
-    --font-fancy: 'Great Vibes', cursive; /* Fuente para títulos */
-    --font-body: 'Montserrat', sans-serif; /* Fuente para texto legible */
+    /* ── PALETA PRINCIPAL ──────────────────────
+       Cambia estos valores para transformar toda la paleta de colores.
+       Usa códigos HEX (ej. #FF0000) o nombres CSS (ej. red)         */
+
+    /* 🎨 COLOR PRIMARIO: Rose gold oscuro — usado en títulos, bordes de cards, detalles */
+    --color-primary: #9E5A6A;
+
+    /* 🎨 COLOR SECUNDARIO: Rosa pálido — usado en bordes, acentos sutiles */
+    --color-secondary: #E8B4BC;
+
+    /* 🎨 COLOR DORADO: Para el gradiente del número XV y botones */
+    --color-gold: #C9A96E;
+
+    /* 🎨 COLOR DORADO CLARO: Complemento del dorado en gradientes */
+    --color-gold-light: #E8D5A3;
+
+    /* 🎨 FONDO PRINCIPAL: Blanco cálido / crema */
+    --color-bg-light: #FDF8F8;
+
+    /* 🎨 FONDO ALTERNATIVO: Un poco más oscuro, para secciones alt-bg */
+    --color-bg-alt: #F9F0F1;
+
+    /* 🎨 TEXTO PRINCIPAL: Gris oscuro elegante */
+    --color-text: #4A3840;
+
+    /* 🎨 TEXTO SECUNDARIO: Para subtítulos y detalles */
+    --color-text-muted: #8A7880;
+
+    /* ── FUENTES ────────────────────────────────
+       Para cambiar fuentes visita fonts.google.com
+       y actualiza también el link en el HTML    */
+
+    /* Fuente serif elegante para textos largos y subtítulos */
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+
+    /* Fuente de display para el número XV y etiquetas */
+    --font-display: 'Cinzel', serif;
+
+    /* Fuente sans para cuerpo de texto y formularios */
+    --font-body: 'Raleway', sans-serif;
+
+    /* ── SOMBRAS ────────────────────────────── */
+    --shadow-rose: 0 10px 40px rgba(158, 90, 106, 0.15);
+    --shadow-card: 0 8px 30px rgba(158, 90, 106, 0.12);
 }
 
-body, html {
+/* =============================================
+   PRELOADER — PANTALLA DE CARGA ELEGANTE
+   ============================================= */
+
+/* Bloquear scroll mientras carga */
+body.is-loading {
+    overflow: hidden;
+}
+
+/* Contenedor principal del preloader — cubre toda la pantalla */
+/* 🎨 CAMBIAR FONDO DEL PRELOADER: modifica el gradient */
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Mismo tono mauve que la sección del timer — continuidad visual */
+    background: linear-gradient(
+        145deg,
+        #3E1825 0%,
+        #4D2135 40%,
+        #5C2840 70%,
+        #3E1825 100%
+    );
+    /* La salida: desliza hacia arriba al terminar */
+    transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1),
+                opacity   0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Estado "salida": se activa desde JS añadiendo la clase .preloader--exit */
+.preloader--exit {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Canvas de partículas del preloader */
+#preloaderCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Contenido central */
+.preloader-content {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Anillo exterior girando lentamente ── */
+.preloader-ring-outer {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 169, 110, 0.25);
+    /* Arco dorado visible solo en una parte */
+    border-top-color: rgba(201, 169, 110, 0.8);
+    border-right-color: rgba(201, 169, 110, 0.4);
+    animation: preloaderSpin 3.5s linear infinite;
+}
+
+/* ── Anillo interior girando al revés más rápido ── */
+.preloader-ring-inner {
+    position: absolute;
+    inset: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(232, 180, 188, 0.12);
+    border-bottom-color: rgba(232, 180, 188, 0.55);
+    border-left-color: rgba(232, 180, 188, 0.3);
+    animation: preloaderSpinReverse 2.2s linear infinite;
+}
+
+/* ── Monograma central ── */
+.preloader-monogram-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    animation: preloaderPulse 2.4s ease-in-out infinite;
+}
+
+/* 🎨 INICIALES "MI" — tamaño y fuente */
+.preloader-monogram {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    /* Gradiente dorado igual al número XV */
+    background: linear-gradient(135deg, #F7EDD0 0%, #C9A96E 55%, #A07840 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: preloaderShimmer 2.8s ease-in-out infinite,
+               preloaderPulse   2.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(201, 169, 110, 0.5));
+    line-height: 1;
+}
+
+/* Línea separadora bajo las iniciales */
+.preloader-mono-line {
+    width: 32px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,169,110,0.7), transparent);
+    animation: preloaderLineExpand 2.4s ease-in-out infinite;
+}
+
+/* Texto "XV Años" */
+.preloader-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(232, 213, 163, 0.7);
+    letter-spacing: 0.12em;
+}
+
+/* ── Barra de progreso al fondo ── */
+.preloader-progress-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* 🎨 COLOR DE LA BARRA DE PROGRESO */
+.preloader-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-gold), #F7EDD0);
+    background-size: 200% 100%;
+    transition: width 0.3s ease;
+    animation: preloaderBarShimmer 1.8s linear infinite;
+    box-shadow: 0 0 8px rgba(201, 169, 110, 0.6);
+}
+
+/* Nombre al pie del preloader */
+.preloader-footer-name {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(220, 195, 155, 0.35);
+    white-space: nowrap;
+}
+
+/* ── Animaciones del preloader ── */
+@keyframes preloaderSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes preloaderSpinReverse {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+}
+
+@keyframes preloaderPulse {
+    0%, 100% { opacity: 0.85; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.04); }
+}
+
+@keyframes preloaderShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+@keyframes preloaderLineExpand {
+    0%, 100% { width: 22px; opacity: 0.5; }
+    50%      { width: 40px; opacity: 1; }
+}
+
+@keyframes preloaderBarShimmer {
+    0%   { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
+/* =============================================
+   RESET Y BASE
+   ============================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
     font-family: var(--font-body);
-    color: var(--color-text-dark);
+    color: var(--color-text);
     background-color: var(--color-bg-light);
-    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
-/* === Títulos Elegantes === */
-h1, h2, .fancy-title {
-    font-family: var(--font-fancy);
-    font-weight: 400;
-    margin: 10px 0;
-}
-
-/* === Sección Principal (Hero) === */
+/* =============================================
+   SECCIÓN HERO
+   ============================================= */
 .hero {
     position: relative;
     height: 100vh;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--color-white);
+    color: #fff;
     overflow: hidden;
 }
 
 #bg-video {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    /* Filtro opcional: si tu video es muy oscuro, esto lo aclara un poco y le da tono rosa */
-    /* filter: brightness(1.2) sepia(30%) hue-rotate(320deg) saturate(1.5); */
-}
-
-.overlay {
-    /* Degradado suave de rosa a transparente en lugar de negro sólido */
-    background: linear-gradient(to bottom, rgba(183, 110, 121, 0.3), rgba(0, 0, 0, 0.6));
-    padding: 40px;
+    inset: 0;
     width: 100%;
-    box-sizing: border-box;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
 }
 
-.main-title { font-size: 5rem; color: var(--color-secondary); text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-.name-title { font-size: 3.5rem; }
-.sub-title { font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; }
-
-/* === Contenedores Generales === */
-.section-container {
-    padding: 60px 20px;
-    text-align: center;
-    background: var(--color-white);
+/* 🎨 OVERLAY DEL HERO: Oscurecimiento sobre el video
+   Baja el 0.55/0.75 para un fondo más claro, súbelo para más oscuro */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(80, 25, 45, 0.55) 0%,
+        rgba(30, 10, 18, 0.75) 100%
+    );
+    z-index: 1;
 }
 
-.alt-bg {
-    background-color: var(--color-bg-light);
-    border-top: 1px solid var(--color-secondary);
-    border-bottom: 1px solid var(--color-secondary);
-}
-
-.fancy-title {
-    font-size: 3rem;
-    color: var(--color-primary);
-}
-
-.details-text {
-    font-size: 1.2rem;
-    margin: 10px 0;
-}
-
-/* === Temporizador Mejorado === */
-#timer {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.time-box {
+.hero-content {
+    position: relative;
+    z-index: 3;
     display: flex;
     flex-direction: column;
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: var(--color-primary);
-    background: var(--color-bg-light);
-    padding: 15px 25px;
-    border-radius: 15px; /* Bordes redondeados suaves */
-    box-shadow: 0 5px 15px rgba(183, 110, 121, 0.15); /* Sombra rosa suave */
+    align-items: center;
+    gap: 18px;
+    padding: 20px;
+    animation: contentReveal 1.5s ease forwards;
 }
 
-.time-box small {
-    font-size: 0.8rem;
-    font-weight: 400;
-    text-transform: uppercase;
-    color: var(--color-text-dark);
+.hero-pretext {
     font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.95rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    /* 🎨 COLOR TEXTO "te invito a celebrar mis" */
+    color: var(--color-gold-light);
+    opacity: 0.9;
 }
 
-/* === Botón Temático === */
-.btn-theme {
-    display: inline-block;
-    padding: 15px 40px;
-    /* Degradado Rose Gold */
-    background: linear-gradient(45deg, var(--color-primary), #d4af37);
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    margin-top: 30px;
+.xv-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    line-height: 1;
+}
+
+/* 🎨 NÚMERO "XV": Cambia el gradiente para cambiar su color */
+.xv-number {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 14vw, 11rem);
     font-weight: 600;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(183, 110, 121, 0.4);
-    transition: transform 0.3s ease;
+    background: linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-gold) 50%, #b8895a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(201, 169, 110, 0.4));
+    animation: shimmer 4s ease-in-out infinite;
+    background-size: 200% 200%;
 }
 
-.btn-theme:hover {
-    transform: translateY(-3px); /* Efecto de elevación al pasar el mouse */
+/* 🎨 TEXTO "Años" junto al XV */
+.xv-label {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--color-gold-light);
+    opacity: 0.85;
 }
 
-/* === Estilos del Mapa === */
-.map-frame-container {
-    margin-top: 30px;
-    border-radius: 20px;
-    overflow: hidden; /* Para que el iframe respete los bordes redondeados */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    border: 3px solid var(--color-secondary); /* Borde rosa delgado */
+/* 🎨 NOMBRE DE LA QUINCEAÑERA en el hero */
+.hero-name {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    line-height: 1.2;
+    color: #fff;
+    letter-spacing: 0.02em;
 }
 
-.map-frame-container iframe {
-    display: block; /* Elimina espacios fantasma debajo del iframe */
+/* 🎨 APELLIDO (en cursiva) del nombre en el hero */
+.hero-surname {
+    font-style: italic;
+    font-size: 0.85em;
+    color: var(--color-gold-light);
+    opacity: 0.9;
 }
 
-/* Ajustes para celulares */
-@media (max-width: 768px) {
-    .main-title { font-size: 3.5rem; }
-    .name-title { font-size: 2.5rem; }
-    .time-box { font-size: 1.8rem; padding: 10px 15px; }
+.hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 240px;
 }
 
-/* =========================================
-   NUEVOS ESTILOS PARA MAPAS DIVIDIDOS Y BOTÓN FINAL
-   ========================================= */
+.divider-line {
+    flex: 1;
+    height: 1px;
+    /* 🎨 COLOR DE LAS LÍNEAS DECORATIVAS DEL HERO */
+    background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.6), transparent);
+}
 
-/* Títulos más pequeños para dentro de las tarjetas */
-.fancy-title-small {
-    font-family: var(--font-fancy);
-    font-size: 2.2rem;
+/* 🎨 COLOR DEL DIAMANTE ◆ DEL HERO */
+.divider-diamond {
+    color: var(--color-gold);
+    font-size: 0.5rem;
+    opacity: 0.8;
+}
+
+/* 🎨 COLOR DE LA FECHA en el hero */
+.hero-date {
+    font-family: var(--font-display);
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    letter-spacing: 0.25em;
+    color: var(--color-gold-light);
+    opacity: 0.8;
+}
+
+.hero-scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s, transform 0.3s;
+    animation: bounce 2.5s ease-in-out 2s infinite;
+}
+
+.hero-scroll-hint:hover {
+    color: rgba(255,255,255,0.9);
+}
+
+/* =============================================
+   PÉTALOS FLOTANTES
+   ============================================= */
+.petals-container {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    top: -60px;
+    opacity: 0;
+    /* --drift, --spin, --init-rot se asignan desde JS por cada pétalo */
+    transform-origin: center center;
+    animation: petalFall cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 4px rgba(150, 100, 30, 0.18));
+}
+
+/* =============================================
+   CONTENEDORES DE SECCIÓN ESTÁNDAR
+   ============================================= */
+.section-container {
+    padding: 80px 20px;
+    text-align: center;
+    background: var(--color-bg-light);
+}
+
+/* 🎨 FONDO DE SECCIONES ALTERNAS (detalles del evento) */
+.alt-bg {
+    background-color: var(--color-bg-alt);
+}
+
+/* 🎨 ETIQUETA PEQUEÑA sobre el título de sección */
+.section-label {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+/* 🎨 TÍTULOS PRINCIPALES DE CADA SECCIÓN */
+.section-title {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
     color: var(--color-primary);
+    margin-bottom: 40px;
+    line-height: 1.1;
+}
+
+/* =============================================
+   SECCIÓN CUENTA REGRESIVA — FONDO OSCURO PROPIO
+   Ocupa pantalla completa para separarse visualmente
+   🎨 CAMBIAR FONDO: Modifica el background gradient
+   ============================================= */
+.timer-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* 🎨 FONDO DE LA SECCIÓN CUENTA REGRESIVA:
+       Rosa mauve profundo — contrasta con el crema sin ser abrupto */
+    background: linear-gradient(
+        145deg,
+        #5C2535 0%,
+        #6E2D42 35%,
+        #7A3350 60%,
+        #5C2535 100%
+    );
+}
+
+/* Canvas de partículas brillantes (fondo) */
+#particlesCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Anillo de luz central decorativo detrás del timer */
+.timer-glow-ring {
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 169, 110, 0.12);
+    box-shadow:
+        0 0 80px rgba(201, 169, 110, 0.06),
+        inset 0 0 80px rgba(201, 169, 110, 0.04);
+    z-index: 1;
+    animation: ringPulse 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.timer-glow-ring::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 169, 110, 0.07);
+}
+
+/* Contenido del timer: encima del canvas */
+.timer-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* Etiqueta "cuenta regresiva" en versión clara para fondo oscuro */
+.timer-label {
+    /* 🎨 COLOR ETIQUETA EN FONDO OSCURO */
+    color: var(--color-gold) !important;
+    opacity: 0.7 !important;
     margin-bottom: 10px;
 }
 
-.details-text-small {
-    font-size: 1rem;
-    margin: 5px 0 15px 0;
-    color: #888;
+/* Título "Faltan..." en versión clara */
+.timer-title {
+    /* 🎨 COLOR TÍTULO EN FONDO OSCURO */
+    color: #F5EAD0 !important;
+    text-shadow: 0 0 40px rgba(201, 169, 110, 0.3);
+    margin-bottom: 48px;
 }
 
-/* Contenedor flexible que pone una tarjeta al lado de la otra */
-.details-split-container {
+/* =============================================
+   TEMPORIZADOR / CAJAS DE TIEMPO
+   ============================================= */
+#timer {
     display: flex;
-    justify-content: center; /* Centrados horizontalmente */
-    gap: 30px; /* Espacio entre las dos tarjetas */
-    margin-top: 30px;
-    flex-wrap: wrap; /* Permite que bajen si no caben */
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-/* El diseño de cada tarjeta (Misa y Salón) */
-.detail-card {
-    background: var(--color-white);
-    border-radius: 20px; /* Bordes redondeados */
-    padding: 25px;
-    box-shadow: 0 8px 25px rgba(183, 110, 121, 0.15); /* Sombra suave rosa */
-    border: 2px solid rgba(255, 192, 203, 0.5); /* Borde rosa sutil */
-    
-    /* Tamaño: Crecen para ocupar espacio, pero no más de 550px cada una */
-    flex: 1 1 300px; 
-    max-width: 550px; 
-}
-
-/* Contenedor para los mapas más pequeños dentro de las tarjetas */
-.map-frame-small {
-    border-radius: 15px;
-    overflow: hidden;
-    margin-top: 15px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-    border: 1px solid var(--color-secondary);
-}
-.map-frame-small iframe {
-    display: block;
-    /* La altura ahora se controla en el HTML (height="250") */
-}
-
-/* Sección final específica para el botón */
-.final-rsvp {
-    background-color: var(--color-bg-light); /* Fondo crema */
-    padding-top: 20px;
-    padding-bottom: 80px; /* Espacio extra al final de la página */
-}
-
-/* AJUSTES PARA CELULAR ACTUALIZADOS */
-@media (max-width: 768px) {
-    /* ... Tus ajustes anteriores ... */
-
-    /* En celular, forzamos que las tarjetas estén en columna (una sobre otra) */
-    .details-split-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-    }
-    /* Que ocupen casi todo el ancho en celular */
-    .detail-card {
-        width: 90%;
-        max-width: none; /* Quitamos el límite de ancho en celular */
-    }
-}
-
-/* =========================================
-   ESTILOS DEL MODAL (VENTANA EMERGENTE)
-   ========================================= */
-
-/* El fondo oscuro que cubre toda la pantalla */
-.modal {
-    display: none; /* Oculto por defecto */
-    position: fixed; 
-    z-index: 1000; /* Encima de todo */
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0,0,0,0.6); /* Fondo negro semitransparente */
-    backdrop-filter: blur(5px); /* Efecto borroso en el fondo */
+/* 🎨 CAJAS DEL TEMPORIZADOR — versión para fondo oscuro */
+.time-box {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    animation: fadeIn 0.3s;
-}
-
-/* La cajita blanca del formulario */
-.modal-content {
-    background-color: var(--color-white);
-    padding: 30px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 400px; /* No muy ancho en PC */
+    /* Fondo semi-transparente con tinte dorado */
+    background: rgba(255, 245, 225, 0.07);
+    backdrop-filter: blur(10px);
+    /* 🎨 BORDE DE LAS CAJAS DEL CONTADOR */
+    border: 1px solid rgba(201, 169, 110, 0.35);
+    border-radius: 18px;
+    padding: 22px 30px;
+    min-width: 110px;
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,245,200,0.12);
     position: relative;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-    border: 2px solid var(--color-secondary);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Inputs y Selects */
-input[type="text"], select {
+.time-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    /* 🎨 LÍNEA DE ACENTO SUPERIOR DE LAS CAJAS */
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.time-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.4), 0 0 20px rgba(201,169,110,0.15);
+}
+
+/* 🎨 NÚMEROS del contador */
+.time-box span {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1;
+    /* 🎨 COLOR NÚMEROS EN FONDO OSCURO */
+    background: linear-gradient(135deg, #F7EDD0 0%, #C9A96E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    min-width: 2ch;
+    text-align: center;
+    filter: drop-shadow(0 0 8px rgba(201,169,110,0.4));
+}
+
+/* 🎨 ETIQUETAS bajo los números */
+.time-box small {
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    /* 🎨 COLOR ETIQUETAS EN FONDO OSCURO */
+    color: rgba(220, 195, 155, 0.65);
+    margin-top: 7px;
+}
+
+/* 🎨 LOS DOS PUNTOS ":" entre cajas */
+.time-separator {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: rgba(201, 169, 110, 0.4);
+    line-height: 1;
+    padding-bottom: 20px;
+}
+
+/* =============================================
+   BOTÓN "DESCUBRIR MÁS" DE LA SECCIÓN TIMER
+   Estilo outline dorado elegante sobre fondo oscuro
+   🎨 CAMBIAR COLORES: Modifica los valores rgba y los colores border/text
+   ============================================= */
+.btn-discover {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 52px;
+    color: rgba(220, 195, 155, 0.7);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    transition: color 0.35s, transform 0.35s;
+    position: relative;
+}
+
+.btn-discover::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: var(--color-gold);
+    transition: width 0.4s ease;
+}
+
+.btn-discover:hover {
+    color: var(--color-gold-light);
+    transform: translateY(4px);
+}
+
+.btn-discover:hover::before {
     width: 100%;
-    padding: 12px;
-    margin: 8px 0 20px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-sizing: border-box; /* Para que el padding no rompa el ancho */
+}
+
+.btn-discover-icon {
+    display: flex;
+    align-items: center;
+    animation: bounce 2.8s ease-in-out 1s infinite;
+}
+
+/* =============================================
+   SEPARADOR ORNAMENTAL ✦ ✦ ✦
+   ============================================= */
+.ornament-divider {
+    display: none; /* Oculto — cada sección ya tiene su propia separación visual */
+}
+
+/* =============================================
+   SECCIÓN DETALLES DEL EVENTO — Fondo crema rosado medio
+   🎨 CAMBIAR FONDO: Modifica el background gradient
+   ============================================= */
+.details-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Cambiado de justify-content:center a flex-start con padding generoso
+       para que el botón CTA siempre sea visible sin quedar cortado */
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 80px 20px 100px;
+    text-align: center;
+    /* 🎨 FONDO DETALLES: crema rosado cálido — tono intermedio entre el crema principal y el mauve */
+    background: linear-gradient(
+        160deg,
+        #F5E6E8 0%,
+        #EDD8DC 45%,
+        #F0DEE0 100%
+    );
+}
+
+/* Canvas de partículas suaves (roses/dorado muy tenue) */
+#detailsCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Todo el contenido sobre el canvas */
+.details-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    /* margin auto centra verticalmente cuando el contenido es menor a 100vh */
+    margin: auto 0;
+    padding: 20px 0 10px;
+}
+
+/* =============================================
+   TARJETAS DE EVENTO (Misa y Salón)
+   ============================================= */
+.details-split-container {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+/* 🎨 TARJETAS DE EVENTO: Fondo y borde */
+.detail-card {
+    background: rgba(255, 251, 251, 0.88);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 32px 28px;
+    box-shadow: 0 10px 40px rgba(100, 40, 60, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    flex: 1 1 300px;
+    max-width: 520px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    /* 🎨 LÍNEA INFERIOR DE LAS TARJETAS (aparece al pasar el mouse) */
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-gold), var(--color-secondary));
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.detail-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(158, 90, 106, 0.2);
+}
+
+.detail-card:hover::after { opacity: 1; }
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+    display: block;
+}
+
+/* 🎨 TÍTULO DE CADA TARJETA (ej. "Ceremonia Religiosa") */
+.card-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.7rem;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+/* 🎨 NOMBRE DEL LUGAR (ej. "Parroquia Cristo Rey") */
+.card-venue {
     font-family: var(--font-body);
     font-size: 1rem;
-    background-color: #fafafa;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 4px;
 }
 
-input:focus, select:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    background-color: #fff;
+/* 🎨 HORA Y CÓDIGO DE VESTIR */
+.card-time {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 18px;
 }
 
-/* Botón de cerrar (X) */
-.close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+.map-frame-small {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--color-secondary);
+    margin-top: 16px;
+}
+
+.map-frame-small iframe { display: block; }
+
+/* =============================================
+   CTA DE DETALLES — Botón "Confirmar Asistencia" al pie de detalles
+   ============================================= */
+.details-cta {
+    margin-top: 48px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Línea decorativa antes del botón */
+.details-cta-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 200px;
+    opacity: 0.6;
+}
+
+.details-cta-line {
+    flex: 1;
+    height: 1px;
+    /* 🎨 COLOR LÍNEAS DEL DIVISOR EN DETALLES */
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+}
+
+/* 🎨 COLOR DIAMANTE DEL DIVISOR EN DETALLES */
+.details-cta-diamond {
+    color: var(--color-primary);
+    font-size: 0.45rem;
+}
+
+/* Texto encima del botón */
+.details-cta-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    /* 🎨 COLOR DEL TEXTO "¿Nos acompañas en este día tan especial?" */
+    color: var(--color-text-muted);
+    opacity: 0.9;
+}
+
+/* Botón CTA en detalles: variante outline sobre fondo rosado */
+.details-btn-cta {
+    /* Sobreescribe el gradiente sólido para un look outline elegante */
+    background: transparent !important;
+    /* 🎨 BORDE Y COLOR DEL BOTÓN CTA EN DETALLES */
+    border: 1.5px solid var(--color-primary) !important;
+    color: var(--color-primary) !important;
+    box-shadow: 0 4px 20px rgba(158, 90, 106, 0.15) !important;
+    backdrop-filter: blur(8px);
+}
+
+.details-btn-cta:hover {
+    /* Al hover se rellena con el gradiente normal */
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gold) 100%) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    box-shadow: 0 10px 30px rgba(158, 90, 106, 0.35) !important;
+}
+
+.details-btn-cta .btn-icon {
+    opacity: 1;
+}
+
+/* =============================================
+   SECCIÓN FINAL (Confirmar Asistencia) — Fondo crema principal + partículas suaves
+   🎨 CAMBIAR FONDO: Modifica el background gradient
+   ============================================= */
+.final-rsvp {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px 100px;
+    text-align: center;
+    /* 🎨 FONDO RSVP: crema muy suave, igual al tono de la página principal */
+    background: linear-gradient(
+        170deg,
+        #FDF8F8 0%,
+        #FAF3F4 50%,
+        #FDF8F8 100%
+    );
+}
+
+/* Canvas de partículas muy suaves (rosa pálido) */
+#rsvpCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Contenido RSVP sobre el canvas */
+.rsvp-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* 🎨 SUBTÍTULO "Tu presencia es el mejor regalo" */
+.rsvp-subtitle {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    margin-top: -20px;
+    margin-bottom: 36px;
+}
+
+/* =============================================
+   BOTÓN PRINCIPAL
+   🎨 CAMBIAR COLORES DEL BOTÓN: Modifica los dos colores del gradiente
+   ============================================= */
+.btn-theme {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 44px;
+    /* 🎨 GRADIENTE DEL BOTÓN: primer color=izquierda, segundo color=derecha */
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gold) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 60px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     cursor: pointer;
-    line-height: 20px;
+    text-decoration: none;
+    /* 🎨 SOMBRA DEL BOTÓN: el color rgba debe coincidir con --color-primary */
+    box-shadow: 0 6px 25px rgba(158, 90, 106, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-theme::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.btn-theme:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(158, 90, 106, 0.5);
+}
+
+.btn-theme:hover::before { opacity: 1; }
+
+.btn-theme:active { transform: translateY(-1px) scale(0.99); }
+
+.btn-icon {
+    display: flex;
+    align-items: center;
+    opacity: 0.85;
+}
+
+/* 🎨 TEXTO DEL PIE DE PÁGINA */
+.footer-note {
+    margin-top: 50px;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    opacity: 0.5;
+}
+
+/* =============================================
+   MODAL (Ventana emergente)
+   ============================================= */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(30, 10, 18, 0.7);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.35s ease;
+}
+
+.show-modal { display: flex !important; }
+
+/* 🎨 FONDO DEL MODAL */
+.modal-content {
+    background: #fff;
+    border-radius: 28px;
+    padding: 40px 36px;
+    width: 92%;
+    max-width: 420px;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+    border: 1px solid var(--color-secondary);
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 🎨 BOTÓN CERRAR (X) DEL MODAL */
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    padding: 6px;
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+    display: flex;
 }
 
 .close-btn:hover {
     color: var(--color-primary);
+    background: rgba(158, 90, 106, 0.08);
 }
 
-/* Animación de entrada */
+.modal-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.modal-icon { font-size: 2.4rem; display: block; margin-bottom: 10px; }
+
+/* 🎨 TÍTULO DEL MODAL */
+.modal-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-bottom: 6px;
+}
+
+/* 🎨 SUBTÍTULO DEL MODAL */
+.modal-subtitle {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* 🎨 ETIQUETAS DEL FORMULARIO ("Nombre Completo", "Número de Lugares") */
+.input-group label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 7px;
+}
+
+/* 🎨 CAMPOS DE TEXTO Y SELECT DEL FORMULARIO */
+input[type="text"],
+select {
+    width: 100%;
+    padding: 13px 16px;
+    /* 🎨 BORDE DE LOS CAMPOS */
+    border: 1.5px solid #e8dde0;
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-text);
+    background: var(--color-bg-light);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    appearance: none;
+}
+
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    /* 🎨 BORDE CUANDO EL CAMPO ESTÁ ACTIVO */
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(158, 90, 106, 0.1);
+    background: #fff;
+}
+
+/* =============================================
+   ANIMACIONES CSS
+   ============================================= */
+@keyframes ringPulse {
+    0%, 100% { transform: scale(1);    opacity: 1; }
+    50%       { transform: scale(1.04); opacity: 0.7; }
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50%       { background-position: 100% 50%; }
+}
+
+@keyframes contentReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(7px); }
+}
+
+@keyframes petalFall {
+    0% {
+        opacity: 0;
+        transform:
+            translateY(-10px)
+            translateX(0px)
+            rotate(var(--init-rot, 0deg))
+            scale(0.5);
+    }
+    6% {
+        opacity: 0.85;
+    }
+    /* Balanceo suave a la mitad de la caída — movimiento natural */
+    25% {
+        transform:
+            translateY(24vh)
+            translateX(calc(var(--drift, 30px) * 0.3))
+            rotate(calc(var(--init-rot, 0deg) + calc(var(--spin, 60deg) * 0.25)))
+            scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform:
+            translateY(50vh)
+            translateX(calc(var(--drift, 30px) * 0.65))
+            rotate(calc(var(--init-rot, 0deg) + calc(var(--spin, 60deg) * 0.5)))
+            scale(1.02);
+        opacity: 0.7;
+    }
+    75% {
+        transform:
+            translateY(75vh)
+            translateX(calc(var(--drift, 30px) * 0.85))
+            rotate(calc(var(--init-rot, 0deg) + calc(var(--spin, 60deg) * 0.8)))
+            scale(0.97);
+        opacity: 0.45;
+    }
+    94% {
+        opacity: 0.15;
+    }
+    100% {
+        opacity: 0;
+        transform:
+            translateY(108vh)
+            translateX(var(--drift, 30px))
+            rotate(calc(var(--init-rot, 0deg) + var(--spin, 60deg)))
+            scale(0.85);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50%      { opacity: 0.8; transform: scale(1.3); }
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.85) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
-/* Ajuste para que el modal se vea bien flexbox */
-.show-modal {
-    display: flex !important;
+/* =============================================
+   RESPONSIVE — CELULAR
+   ============================================= */
+@media (max-width: 768px) {
+    .section-container { padding: 60px 16px; }
+
+    #timer { gap: 10px; }
+
+    .time-box { padding: 16px 18px; min-width: 80px; }
+    .time-box span { font-size: 2.2rem; }
+
+    .details-split-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .detail-card { width: 100%; max-width: none; padding: 24px 20px; }
+    .modal-content { padding: 30px 22px; }
+    .btn-theme { padding: 14px 32px; font-size: 0.82rem; }
+}
+
+@media (max-width: 400px) {
+    .time-separator { display: none; }
 }

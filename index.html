@@ -3,99 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis XV - Maria Ines Villeda Leyva</title>
+    <title>XV Años · Maria Inés Villeda Leyva</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
-<meta property="og:title" content="Mis XV Años - Maria Ines">
-<meta property="og:description" content="Te invito a celebrar este día tan especial conmigo. ¡Entra para ver los detalles!">
-<meta property="og:image" content="https://i.postimg.cc/D0RJCt7Q/foto-portada.jpg">
-<meta property="og:url" content="https://villedaleyvamarco-cloud.github.io/xv-maria-ines/">
-<meta property="og:type" content="website">
-
+    <meta property="og:title" content="XV Años · Maria Inés">
+    <meta property="og:description" content="Te invito a celebrar este día tan especial conmigo.">
+    <meta property="og:image" content="https://i.postimg.cc/D0RJCt7Q/foto-portada.jpg">
+    <meta property="og:url" content="https://villedaleyvamarco-cloud.github.io/xv-maria-ines/">
+    <meta property="og:type" content="website">
 </head>
-<body>
+<body class="is-loading">
 
+    <!-- =============================================
+         PRELOADER — Pantalla de carga elegante
+         Se oculta automáticamente cuando la página termina de cargar.
+         🎨 CAMBIAR INICIALES: Modifica "MI" dentro de .preloader-monogram
+         🎨 CAMBIAR NOMBRE: Modifica el texto de .preloader-name
+         ============================================= -->
+    <div id="preloader" class="preloader" aria-hidden="true">
+
+        <!-- Canvas de partículas del preloader -->
+        <canvas id="preloaderCanvas"></canvas>
+
+        <div class="preloader-content">
+
+            <!-- Anillo exterior pulsante -->
+            <div class="preloader-ring-outer"></div>
+            <!-- Anillo interior -->
+            <div class="preloader-ring-inner"></div>
+
+            <!-- Monograma "MI" con efecto shimmer -->
+            <div class="preloader-monogram-wrap">
+                <!-- 🎨 CAMBIAR INICIALES AQUÍ -->
+                <span class="preloader-monogram">MI</span>
+                <!-- Línea separadora bajo las iniciales -->
+                <div class="preloader-mono-line"></div>
+                <!-- 🎨 CAMBIAR TEXTO "XV Años" AQUÍ -->
+                <span class="preloader-sub">XV Años</span>
+            </div>
+
+        </div>
+
+        <!-- Barra de progreso al fondo -->
+        <div class="preloader-progress-wrap">
+            <div class="preloader-progress-bar" id="preloaderBar"></div>
+        </div>
+
+        <!-- Nombre completo muy pequeño al pie -->
+        <p class="preloader-footer-name">Maria Inés Villeda Leyva</p>
+
+    </div>
+
+
+    <!-- =============================================
+         SECCIÓN HERO: Video de fondo + título principal
+         ============================================= -->
     <section class="hero">
-        <video autoplay muted loop id="bg-video">
+        <!-- 🎬 CAMBIAR VIDEO: Reemplaza "assets/video-fondo.mp4" con la ruta de tu video -->
+        <video autoplay muted loop playsinline id="bg-video">
             <source src="assets/video-fondo.mp4" type="video/mp4">
         </video>
-        <div class="overlay">
-            <p class="sub-title" data-aos="fade-down">Te invito a celebrar mis</p>
-            <h1 class="main-title" data-aos="zoom-in" data-aos-delay="300">XV Años</h1>
-            <h2 class="name-title" data-aos="fade-up" data-aos-delay="600">Maria Ines Villeda Leyva</h2>
+        <div class="hero-overlay"></div>
+
+        <!-- Canvas de pétalos dorados (generado por JS) -->
+        <div class="petals-container" id="petals"></div>
+
+        <div class="hero-content">
+            <p class="hero-pretext" data-aos="fade-down" data-aos-duration="1400">Te invito a celebrar mis</p>
+
+            <div class="xv-wrapper" data-aos="zoom-in" data-aos-delay="400" data-aos-duration="1600">
+                <span class="xv-number">XV</span>
+                <span class="xv-label">Años</span>
+            </div>
+
+            <!-- 🎨 CAMBIAR NOMBRE: Escribe el nombre de la quinceañera aquí -->
+            <h1 class="hero-name" data-aos="fade-up" data-aos-delay="800" data-aos-duration="1400">
+                Maria Inés<br><span class="hero-surname">Villeda Leyva</span>
+            </h1>
+
+            <div class="hero-divider" data-aos="fade-up" data-aos-delay="1200">
+                <span class="divider-line"></span>
+                <span class="divider-diamond">◆</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <!-- 🗓️ CAMBIAR FECHA VISIBLE EN HERO -->
+            <p class="hero-date" data-aos="fade-up" data-aos-delay="1400">19 · Diciembre · 2026</p>
+
+            <a href="#cuenta-regresiva" class="hero-scroll-hint" data-aos="fade-up" data-aos-delay="1800">
+                <span>Descubrir</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </a>
         </div>
     </section>
 
-    <section class="section-container" data-aos="fade-up">
-        <h2 class="fancy-title">La Cuenta Regresiva</h2>
-        <div id="timer">
-            <div class="time-box"><span id="days">00</span><small>Días</small></div> :
-            <div class="time-box"><span id="hours">00</span><small>Hrs</small></div> :
-            <div class="time-box"><span id="minutes">00</span><small>Min</small></div>
+    <!-- =============================================
+         CUENTA REGRESIVA — Sección propia con fondo oscuro
+         ============================================= -->
+    <section class="timer-section" id="cuenta-regresiva">
+
+        <!-- Canvas de partículas brillantes (JS) -->
+        <canvas id="particlesCanvas"></canvas>
+
+        <!-- Decoración: anillo de luz central -->
+        <div class="timer-glow-ring"></div>
+
+        <div class="timer-inner" data-aos="fade-up" data-aos-duration="1000">
+            <div class="section-label timer-label">cuenta regresiva</div>
+            <h2 class="section-title timer-title">Faltan...</h2>
+
+            <div id="timer">
+                <div class="time-box" data-aos="flip-left" data-aos-delay="100">
+                    <span id="days">00</span>
+                    <small>Días</small>
+                </div>
+                <div class="time-separator">:</div>
+                <div class="time-box" data-aos="flip-left" data-aos-delay="200">
+                    <span id="hours">00</span>
+                    <small>Horas</small>
+                </div>
+                <div class="time-separator">:</div>
+                <div class="time-box" data-aos="flip-left" data-aos-delay="300">
+                    <span id="minutes">00</span>
+                    <small>Minutos</small>
+                </div>
+            </div>
+
+            <!-- Botón "Descubrir más" hacia detalles del evento -->
+            <a href="#detalles" class="btn-discover" data-aos="fade-up" data-aos-delay="500">
+                <span class="btn-text">Descubrir más</span>
+                <span class="btn-discover-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                    </svg>
+                </span>
+            </a>
         </div>
     </section>
 
-    <section class="section-container alt-bg" data-aos="fade-up">
-        <h2 class="fancy-title">Detalles del Evento</h2>
-        
+    <!-- =============================================
+         DETALLES DEL EVENTO: Ceremonia y Fiesta
+         ============================================= -->
+    <section class="details-section" id="detalles">
+        <!-- Canvas de partículas rosadas suaves -->
+        <canvas id="detailsCanvas"></canvas>
+
+        <div class="details-inner" data-aos="fade-up">
+        <div class="section-label">el gran día</div>
+        <h2 class="section-title">Detalles del Evento</h2>
+
         <div class="details-split-container">
-            
-            <div class="detail-card">
-                <h3 class="fancy-title-small">Ceremonia Religiosa</h3>
-                <p class="details-text">Parroquia Cristo Rey</p>
-                <p class="details-text-small">12:00 Horas</p>
-                
+
+            <!-- TARJETA 1: Ceremonia Religiosa -->
+            <div class="detail-card" data-aos="fade-right" data-aos-delay="100">
+                <div class="card-icon">⛪</div>
+                <!-- 🎨 CAMBIAR: Nombre de la iglesia -->
+                <h3 class="card-title">Ceremonia Religiosa</h3>
+                <!-- 🎨 CAMBIAR: Dirección/nombre del recinto -->
+                <p class="card-venue">Parroquia Cristo Rey</p>
+                <!-- 🎨 CAMBIAR: Hora de inicio de la misa -->
+                <p class="card-time">12:00 hrs</p>
+
                 <div class="map-frame-small">
-                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470.4387915333681!2d-99.20127583982266!3d19.390344012860105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d201ce2222011d%3A0xd6404adfce6de1da!2sParroquia%20de%20Cristo%20Rey%20TACUBAYA!5e0!3m2!1ses-419!2smx!4v1771226939296!5m2!1ses-419!2smx" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <!-- 🗺️ CAMBIAR MAPA IGLESIA: Ve a Google Maps → Compartir → Insertar mapa → copia el src -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470.4387915333681!2d-99.20127583982266!3d19.390344012860105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d201ce2222011d%3A0xd6404adfce6de1da!2sParroquia%20de%20Cristo%20Rey%20TACUBAYA!5e0!3m2!1ses-419!2smx!4v1771226939296!5m2!1ses-419!2smx"
+                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
 
-            <div class="detail-card">
-                <h3 class="fancy-title-small">Fiesta</h3>
-                <p class="details-text">Ubicacion del Evento</p>
-                <p class="details-text-small">15:00 Horas - Código de Vestir: N/A</p>
-                
+            <!-- TARJETA 2: Fiesta / Salón -->
+            <div class="detail-card" data-aos="fade-left" data-aos-delay="200">
+                <div class="card-icon">🎊</div>
+                <!-- 🎨 CAMBIAR: Nombre del salón o lugar de la fiesta -->
+                <h3 class="card-title">Celebración</h3>
+                <!-- 🎨 CAMBIAR: Dirección del salón -->
+                <p class="card-venue">Ubicación del Evento</p>
+                <!-- 🎨 CAMBIAR: Hora de inicio y código de vestir -->
+                <p class="card-time">15:00 hrs · Código de Vestir: N/A</p>
+
                 <div class="map-frame-small">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.8684677869!2d-99.20382582422765!3d19.374847181892314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d20031d98e76c3%3A0xdabf77b5e7032b88!2sCda.%20Rosa%20Verde%2094%2C%20El%20Alfalfar%2C%20%C3%81lvaro%20Obreg%C3%B3n%2C%2001470%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1771227547886!5m2!1ses-419!2smx" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <!-- 🗺️ CAMBIAR MAPA SALÓN: Ve a Google Maps → Compartir → Insertar mapa → copia el src -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.8684677869!2d-99.20382582422765!3d19.374847181892314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d20031d98e76c3%3A0xdabf77b5e7032b88!2sCda.%20Rosa%20Verde%2094%2C%20El%20Alfalfar%2C%20%C3%81lvaro%20Obreg%C3%B3n%2C%2001470%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1771227547886!5m2!1ses-419!2smx"
+                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
 
         </div>
+
+        <!-- Botón para ir a confirmar asistencia -->
+        <div class="details-cta" data-aos="fade-up" data-aos-delay="300">
+            <div class="details-cta-divider">
+                <span class="details-cta-line"></span>
+                <span class="details-cta-diamond">◆</span>
+                <span class="details-cta-line"></span>
+            </div>
+            <p class="details-cta-text">¿Nos acompañas en este día tan especial?</p>
+            <a href="#rsvp" class="btn-theme details-btn-cta">
+                <span class="btn-text">Confirmar Asistencia</span>
+                <span class="btn-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.03 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                </span>
+            </a>
+        </div>
+
+        </div><!-- /details-inner -->
     </section>
 
-    <section class="section-container final-rsvp" data-aos="zoom-in">
-        <p class="details-text">Esperamos contar con tu presencia</p>
-        <button onclick="openModal()" class="btn-theme" style="border: none; cursor: pointer;">
-        Confirmar Asistencia
-    </button>
+    <!-- =============================================
+         SECCIÓN FINAL: Confirmar Asistencia
+         ============================================= -->
+    <section class="final-rsvp" id="rsvp">
+        <!-- Canvas de partículas muy suaves -->
+        <canvas id="rsvpCanvas"></canvas>
+
+        <div class="rsvp-inner" data-aos="zoom-in">
+        <div class="section-label">únete a la celebración</div>
+        <h2 class="section-title">Confirma tu Asistencia</h2>
+        <p class="rsvp-subtitle">Tu presencia es el mejor regalo</p>
+
+        <button onclick="openModal()" class="btn-theme">
+            <span class="btn-text">Confirmar Asistencia</span>
+            <span class="btn-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.03 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+            </span>
+        </button>
+
+        <!-- 🎨 CAMBIAR: Texto del pie de página -->
+        <p class="footer-note">Maria Inés Villeda Leyva · 2026</p>
+        </div><!-- /rsvp-inner -->
     </section>
 
+    <!-- =============================================
+         MODAL: Ventana de confirmación con WhatsApp
+         ============================================= -->
     <div id="rsvpModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 class="fancy-title-small" style="text-align: center;">Confirmar Asistencia</h2>
-            <p class="details-text-small" style="text-align: center;">Por favor ingresa tus datos</p>
+            <button class="close-btn" onclick="closeModal()" aria-label="Cerrar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <div class="modal-header">
+                <span class="modal-icon">💌</span>
+                <h2 class="modal-title">Confirmar Asistencia</h2>
+                <p class="modal-subtitle">Llena tus datos para enviarlos por WhatsApp</p>
+            </div>
 
             <form id="rsvpForm" onsubmit="sendToWhatsapp(event)">
-                
-                <label for="guestName">Nombre Completo:</label>
-                <input type="text" id="guestName" placeholder="Ej. Familia Pérez López" required>
+                <div class="input-group">
+                    <label for="guestName">Nombre Completo</label>
+                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López" required>
+                </div>
 
-                <label for="guestCount">Número de Lugares:</label>
-                <select id="guestCount" required>
-                    <option value="" disabled selected>Selecciona personas</option>
-                    <option value="2">2 Personas</option>
-                    <option value="3">3 Personas</option>
-                    <option value="4">4 Personas</option>
-                </select>
+                <div class="input-group">
+                    <label for="guestCount">Número de Lugares</label>
+                    <select id="guestCount" required>
+                        <option value="" disabled selected>Selecciona personas</option>
+                        <option value="1">1 Persona</option>
+                        <option value="2">2 Personas</option>
+                        <option value="3">3 Personas</option>
+                        <option value="4">4 Personas</option>
+                    </select>
+                </div>
 
-                <button type="submit" class="btn-theme" style="width: 100%; border: none; cursor: pointer;">
-                    Enviar por WhatsApp
+                <button type="submit" class="btn-theme" style="width: 100%;">
+                    <span class="btn-text">Enviar por WhatsApp</span>
+                    <span class="btn-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </span>
                 </button>
             </form>
         </div>
