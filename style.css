@@ -7,11 +7,11 @@
        Cambia estos valores para transformar toda la paleta de colores.
        Usa códigos HEX (ej. #FF0000) o nombres CSS (ej. red)         */
 
-    /* 🎨 COLOR PRIMARIO: Rose gold oscuro — usado en títulos, bordes de cards, detalles */
-    --color-primary: #9E5A6A;
+    /* 🎨 COLOR PRIMARIO: Dorado profundo / bronce — usado en títulos, bordes de cards, detalles */
+    --color-primary: #A9822E;
 
-    /* 🎨 COLOR SECUNDARIO: Rosa pálido — usado en bordes, acentos sutiles */
-    --color-secondary: #E8B4BC;
+    /* 🎨 COLOR SECUNDARIO: Champagne dorado claro — usado en bordes, acentos sutiles */
+    --color-secondary: #E3CBA0;
 
     /* 🎨 COLOR DORADO: Para el gradiente del número XV y botones */
     --color-gold: #C9A96E;
@@ -20,16 +20,16 @@
     --color-gold-light: #E8D5A3;
 
     /* 🎨 FONDO PRINCIPAL: Blanco cálido / crema */
-    --color-bg-light: #FDF8F8;
+    --color-bg-light: #FDFBF5;
 
     /* 🎨 FONDO ALTERNATIVO: Un poco más oscuro, para secciones alt-bg */
-    --color-bg-alt: #F9F0F1;
+    --color-bg-alt: #F7F1E0;
 
-    /* 🎨 TEXTO PRINCIPAL: Gris oscuro elegante */
-    --color-text: #4A3840;
+    /* 🎨 TEXTO PRINCIPAL: Marrón oscuro elegante */
+    --color-text: #47401F;
 
     /* 🎨 TEXTO SECUNDARIO: Para subtítulos y detalles */
-    --color-text-muted: #8A7880;
+    --color-text-muted: #8A7D5E;
 
     /* ── FUENTES ────────────────────────────────
        Para cambiar fuentes visita fonts.google.com
@@ -45,8 +45,8 @@
     --font-body: 'Raleway', sans-serif;
 
     /* ── SOMBRAS ────────────────────────────── */
-    --shadow-rose: 0 10px 40px rgba(158, 90, 106, 0.15);
-    --shadow-card: 0 8px 30px rgba(158, 90, 106, 0.12);
+    --shadow-rose: 0 10px 40px rgba(169, 130, 46, 0.15);
+    --shadow-card: 0 8px 30px rgba(169, 130, 46, 0.12);
 }
 
 /* =============================================
@@ -68,13 +68,13 @@ body.is-loading {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Mismo tono mauve que la sección del timer — continuidad visual */
+    /* Mismo tono bronce/espresso que la sección del timer — continuidad visual */
     background: linear-gradient(
         145deg,
-        #3E1825 0%,
-        #4D2135 40%,
-        #5C2840 70%,
-        #3E1825 100%
+        #2B2210 0%,
+        #3B2E14 40%,
+        #4A3A1A 70%,
+        #2B2210 100%
     );
     /* La salida: desliza hacia arriba al terminar */
     transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1),
@@ -281,17 +281,19 @@ body {
     height: 100%;
     object-fit: cover;
     z-index: 0;
+    /* 🎨 FILTRO CÁLIDO: quita el aspecto grisáceo del video y lo acerca a tonos dorados/crema */
+    filter: sepia(0.35) saturate(1.5) brightness(0.92) contrast(1.05);
 }
 
-/* 🎨 OVERLAY DEL HERO: Oscurecimiento sobre el video
-   Baja el 0.55/0.75 para un fondo más claro, súbelo para más oscuro */
+/* 🎨 OVERLAY DEL HERO: Oscurecimiento cálido sobre el video
+   Baja el 0.5/0.72 para un fondo más claro, súbelo para más oscuro */
 .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
         160deg,
-        rgba(80, 25, 45, 0.55) 0%,
-        rgba(30, 10, 18, 0.75) 100%
+        rgba(80, 50, 10, 0.5) 0%,
+        rgba(35, 20, 5, 0.72) 100%
     );
     z-index: 1;
 }
@@ -455,12 +457,12 @@ body {
 /* 🎨 ETIQUETA PEQUEÑA sobre el título de sección */
 .section-label {
     font-family: var(--font-display);
-    font-size: 0.7rem;
-    letter-spacing: 0.35em;
+    font-size: clamp(0.68rem, 2vw, 0.75rem);
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--color-gold);
     margin-bottom: 12px;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 /* 🎨 TÍTULOS PRINCIPALES DE CADA SECCIÓN */
@@ -487,13 +489,13 @@ body {
     justify-content: center;
     overflow: hidden;
     /* 🎨 FONDO DE LA SECCIÓN CUENTA REGRESIVA:
-       Rosa mauve profundo — contrasta con el crema sin ser abrupto */
+       Bronce dorado profundo — contrasta con el crema sin ser abrupto */
     background: linear-gradient(
         145deg,
-        #5C2535 0%,
-        #6E2D42 35%,
-        #7A3350 60%,
-        #5C2535 100%
+        #3A2C12 0%,
+        #4A3818 35%,
+        #56411E 60%,
+        #3A2C12 100%
     );
 }
 
@@ -693,6 +695,53 @@ body {
 }
 
 /* =============================================
+   BOTÓN "DESCUBRIR" — VARIANTE CLARA
+   Mismo comportamiento que .btn-discover pero con
+   colores para usarse sobre fondos crema/claros
+   🎨 CAMBIAR COLORES: Modifica color y color:hover
+   ============================================= */
+.btn-discover-light {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 56px;
+    color: var(--color-gold);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    transition: color 0.35s, transform 0.35s, opacity 0.35s;
+    position: relative;
+    animation: bounce 2.5s ease-in-out 2s infinite;
+}
+
+.btn-discover-light::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: var(--color-primary);
+    transition: width 0.4s ease;
+}
+
+.btn-discover-light:hover {
+    color: var(--color-primary);
+    opacity: 1;
+    transform: translateY(4px);
+}
+
+.btn-discover-light:hover::before {
+    width: 100%;
+}
+
+/* =============================================
    SEPARADOR ORNAMENTAL ✦ ✦ ✦
    ============================================= */
 .ornament-divider {
@@ -700,7 +749,104 @@ body {
 }
 
 /* =============================================
-   SECCIÓN DETALLES DEL EVENTO — Fondo crema rosado medio
+   SECCIÓN PADRES Y PADRINOS
+   ============================================= */
+
+/* 🎨 SECCIÓN A PANTALLA COMPLETA: al hacer clic en "Descubrir" desde el
+   hero, esta sección llena todo el alto de pantalla y no se alcanza a
+   ver ni el hero ni la cuenta regresiva al mismo tiempo */
+.parents-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* 🎨 FRASE DE BENDICIÓN ("Con la bendición de Dios...") */
+.parents-blessing {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3.4vw, 2rem);
+    color: var(--color-text);
+    line-height: 1.55;
+    margin-bottom: 28px;
+}
+
+/* Divisor ornamental ◆ entre la bendición y los nombres */
+.parents-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 220px;
+    margin: 0 auto 46px;
+}
+
+.parents-columns {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 80px;
+    flex-wrap: wrap;
+}
+
+.parents-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    min-width: 240px;
+}
+
+/* 🎨 ETIQUETA "MIS PADRES" / "MIS PADRINOS" */
+.parents-label {
+    font-family: var(--font-display);
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 4px;
+    position: relative;
+    padding-bottom: 14px;
+}
+
+/* Pequeña línea bajo cada etiqueta, para darle peso y separación del nombre */
+.parents-label::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* 🎨 NOMBRES de padres y padrinos — mismo peso visual que el nombre de la quinceañera */
+.parents-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.7rem, 4.4vw, 2.5rem);
+    font-weight: 400;
+    color: var(--color-primary);
+    line-height: 1.4;
+    text-shadow: 0 0 24px rgba(201, 169, 110, 0.2);
+}
+
+/* 🎨 LÍNEA DIVISORA vertical entre columnas (horizontal en móvil) */
+.parents-divider-vertical {
+    width: 1px;
+    align-self: stretch;
+    background: linear-gradient(180deg, transparent, var(--color-secondary), transparent);
+}
+
+/* =============================================
+   SECCIÓN DETALLES DEL EVENTO — Fondo crema dorado medio
    🎨 CAMBIAR FONDO: Modifica el background gradient
    ============================================= */
 .details-section {
@@ -715,12 +861,12 @@ body {
     overflow: hidden;
     padding: 80px 20px 100px;
     text-align: center;
-    /* 🎨 FONDO DETALLES: crema rosado cálido — tono intermedio entre el crema principal y el mauve */
+    /* 🎨 FONDO DETALLES: crema dorado cálido — tono intermedio entre el blanco crema y el bronce */
     background: linear-gradient(
         160deg,
-        #F5E6E8 0%,
-        #EDD8DC 45%,
-        #F0DEE0 100%
+        #F8F0DA 0%,
+        #F1E4C4 45%,
+        #F5EAD2 100%
     );
 }
 
@@ -762,7 +908,7 @@ body {
     backdrop-filter: blur(12px);
     border-radius: 24px;
     padding: 32px 28px;
-    box-shadow: 0 10px 40px rgba(100, 40, 60, 0.1);
+    box-shadow: 0 10px 40px rgba(140, 105, 40, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.7);
     flex: 1 1 300px;
     max-width: 520px;
@@ -784,7 +930,7 @@ body {
 
 .detail-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(158, 90, 106, 0.2);
+    box-shadow: 0 20px 50px rgba(169, 130, 46, 0.2);
 }
 
 .detail-card:hover::after { opacity: 1; }
@@ -884,7 +1030,7 @@ body {
     /* 🎨 BORDE Y COLOR DEL BOTÓN CTA EN DETALLES */
     border: 1.5px solid var(--color-primary) !important;
     color: var(--color-primary) !important;
-    box-shadow: 0 4px 20px rgba(158, 90, 106, 0.15) !important;
+    box-shadow: 0 4px 20px rgba(169, 130, 46, 0.15) !important;
     backdrop-filter: blur(8px);
 }
 
@@ -893,7 +1039,7 @@ body {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gold) 100%) !important;
     color: #fff !important;
     border-color: transparent !important;
-    box-shadow: 0 10px 30px rgba(158, 90, 106, 0.35) !important;
+    box-shadow: 0 10px 30px rgba(169, 130, 46, 0.35) !important;
 }
 
 .details-btn-cta .btn-icon {
@@ -917,9 +1063,9 @@ body {
     /* 🎨 FONDO RSVP: crema muy suave, igual al tono de la página principal */
     background: linear-gradient(
         170deg,
-        #FDF8F8 0%,
-        #FAF3F4 50%,
-        #FDF8F8 100%
+        #FDFBF5 0%,
+        #FAF5E8 50%,
+        #FDFBF5 100%
     );
 }
 
@@ -975,7 +1121,7 @@ body {
     cursor: pointer;
     text-decoration: none;
     /* 🎨 SOMBRA DEL BOTÓN: el color rgba debe coincidir con --color-primary */
-    box-shadow: 0 6px 25px rgba(158, 90, 106, 0.4);
+    box-shadow: 0 6px 25px rgba(169, 130, 46, 0.4);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -992,7 +1138,7 @@ body {
 
 .btn-theme:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 12px 35px rgba(158, 90, 106, 0.5);
+    box-shadow: 0 12px 35px rgba(169, 130, 46, 0.5);
 }
 
 .btn-theme:hover::before { opacity: 1; }
@@ -1009,11 +1155,11 @@ body {
 .footer-note {
     margin-top: 50px;
     font-family: var(--font-display);
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
+    font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
-    opacity: 0.5;
+    color: var(--color-primary);
+    opacity: 0.85;
 }
 
 /* =============================================
@@ -1024,7 +1170,7 @@ body {
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(30, 10, 18, 0.7);
+    background: rgba(20, 15, 6, 0.7);
     backdrop-filter: blur(8px);
     align-items: center;
     justify-content: center;
@@ -1063,7 +1209,7 @@ body {
 
 .close-btn:hover {
     color: var(--color-primary);
-    background: rgba(158, 90, 106, 0.08);
+    background: rgba(169, 130, 46, 0.08);
 }
 
 .modal-header {
@@ -1126,7 +1272,7 @@ select:focus {
     outline: none;
     /* 🎨 BORDE CUANDO EL CAMPO ESTÁ ACTIVO */
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(158, 90, 106, 0.1);
+    box-shadow: 0 0 0 3px rgba(169, 130, 46, 0.1);
     background: #fff;
 }
 
@@ -1219,10 +1365,29 @@ select:focus {
 }
 
 /* =============================================
-   RESPONSIVE — CELULAR
+   RESPONSIVE — TABLET Y CELULAR GRANDE (≤768px)
+   La mayoría de las visitas llegarán desde WhatsApp
+   en el celular, así que estas reglas ajustan
+   espaciados y tamaños para que todo se vea cómodo.
    ============================================= */
 @media (max-width: 768px) {
-    .section-container { padding: 60px 16px; }
+    /* Espaciados generales de cada sección */
+    .hero-content { padding: 16px; gap: 14px; }
+    .timer-inner { padding: 48px 16px; }
+    .details-section { padding: 60px 16px 70px; }
+    .final-rsvp { padding: 60px 16px 70px; }
+    .details-inner { padding: 16px 0 6px; }
+    .parents-section { padding: 60px 16px; }
+
+    .parents-ornament { margin-bottom: 34px; }
+    .parents-columns { gap: 40px; }
+    .parents-col { gap: 10px; min-width: 0; }
+    .parents-divider-vertical {
+        width: 120px;
+        height: 1px;
+        align-self: center;
+        background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+    }
 
     #timer { gap: 10px; }
 
@@ -1238,8 +1403,48 @@ select:focus {
     .detail-card { width: 100%; max-width: none; padding: 24px 20px; }
     .modal-content { padding: 30px 22px; }
     .btn-theme { padding: 14px 32px; font-size: 0.82rem; }
+
+    .footer-note { margin-top: 36px; }
 }
 
+/* =============================================
+   RESPONSIVE — CELULAR MEDIANO (≤480px)
+   ============================================= */
+@media (max-width: 480px) {
+    .hero-content { gap: 12px; }
+    .hero-divider { width: 180px; }
+
+    .timer-inner { padding: 40px 12px; }
+    .details-section { padding: 50px 12px 60px; }
+    .final-rsvp { padding: 50px 12px 60px; }
+    .parents-section { padding: 50px 12px; }
+
+    .parents-ornament { margin-bottom: 26px; }
+    .parents-columns { gap: 30px; }
+    .parents-col { min-width: 0; gap: 8px; }
+
+    #timer { gap: 8px; }
+    .time-box { padding: 14px 14px; min-width: 68px; }
+    .time-box span { font-size: 1.8rem; }
+    .time-box small { font-size: 0.56rem; letter-spacing: 0.15em; }
+    .time-separator { font-size: 2rem; padding-bottom: 14px; }
+
+    .detail-card { padding: 20px 16px; }
+    .card-title { font-size: 1.4rem; }
+
+    .details-cta-divider { width: 160px; }
+    .btn-theme { padding: 13px 24px; font-size: 0.76rem; gap: 6px; }
+
+    .modal-content { padding: 26px 18px; width: 94%; }
+    .modal-title { font-size: 1.5rem; }
+
+    .footer-note { font-size: 0.8rem; letter-spacing: 0.16em; margin-top: 28px; }
+}
+
+/* =============================================
+   RESPONSIVE — CELULAR MUY ANGOSTO (≤400px)
+   ============================================= */
 @media (max-width: 400px) {
     .time-separator { display: none; }
+    #timer { gap: 12px; }
 }

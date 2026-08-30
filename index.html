@@ -96,7 +96,47 @@
             <!-- 🗓️ CAMBIAR FECHA VISIBLE EN HERO -->
             <p class="hero-date" data-aos="fade-up" data-aos-delay="1400">19 · Diciembre · 2026</p>
 
-            <a href="#cuenta-regresiva" class="hero-scroll-hint" data-aos="fade-up" data-aos-delay="1800">
+            <a href="#padres" class="hero-scroll-hint" data-aos="fade-up" data-aos-delay="1800">
+                <span>Descubrir</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- =============================================
+         PADRES Y PADRINOS
+         🎨 CAMBIAR NOMBRES: Modifica los textos dentro de .parents-name
+         ============================================= -->
+    <section class="section-container alt-bg parents-section" id="padres">
+        <div data-aos="fade-up" data-aos-duration="1000">
+            <p class="parents-blessing">Con la bendición de Dios<br>y el amor de mis padres</p>
+
+            <div class="parents-ornament">
+                <span class="divider-line"></span>
+                <span class="divider-diamond">◆</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="parents-columns">
+                <div class="parents-col" data-aos="fade-right" data-aos-delay="150">
+                    <span class="parents-label">Mis Padres</span>
+                    <p class="parents-name">Santiago Villeda Quintana</p>
+                    <p class="parents-name">Norma Leyva Arcos</p>
+                </div>
+
+                <div class="parents-divider-vertical"></div>
+
+                <div class="parents-col" data-aos="fade-left" data-aos-delay="150">
+                    <span class="parents-label">Mis Padrinos</span>
+                    <p class="parents-name">Rafael Mata Martinez</p>
+                    <p class="parents-name">Maria Elizabeth Leyva Arcos</p>
+                </div>
+            </div>
+
+            <!-- Botón "Descubrir" hacia la cuenta regresiva -->
+            <a href="#cuenta-regresiva" class="btn-discover-light" data-aos="fade-up" data-aos-delay="300">
                 <span>Descubrir</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M12 5v14M5 12l7 7 7-7"/>
@@ -153,7 +193,7 @@
          DETALLES DEL EVENTO: Ceremonia y Fiesta
          ============================================= -->
     <section class="details-section" id="detalles">
-        <!-- Canvas de partículas rosadas suaves -->
+        <!-- Canvas de partículas doradas suaves -->
         <canvas id="detailsCanvas"></canvas>
 
         <div class="details-inner" data-aos="fade-up">
@@ -164,13 +204,13 @@
 
             <!-- TARJETA 1: Ceremonia Religiosa -->
             <div class="detail-card" data-aos="fade-right" data-aos-delay="100">
-                <div class="card-icon">⛪</div>
+                <div class="card-icon"></div>
                 <!-- 🎨 CAMBIAR: Nombre de la iglesia -->
                 <h3 class="card-title">Ceremonia Religiosa</h3>
                 <!-- 🎨 CAMBIAR: Dirección/nombre del recinto -->
                 <p class="card-venue">Parroquia Cristo Rey</p>
                 <!-- 🎨 CAMBIAR: Hora de inicio de la misa -->
-                <p class="card-time">12:00 hrs</p>
+                <p class="card-time">4:30 hrs</p>
 
                 <div class="map-frame-small">
                     <!-- 🗺️ CAMBIAR MAPA IGLESIA: Ve a Google Maps → Compartir → Insertar mapa → copia el src -->
@@ -183,13 +223,13 @@
 
             <!-- TARJETA 2: Fiesta / Salón -->
             <div class="detail-card" data-aos="fade-left" data-aos-delay="200">
-                <div class="card-icon">🎊</div>
+                <div class="card-icon"></div>
                 <!-- 🎨 CAMBIAR: Nombre del salón o lugar de la fiesta -->
                 <h3 class="card-title">Celebración</h3>
                 <!-- 🎨 CAMBIAR: Dirección del salón -->
                 <p class="card-venue">Ubicación del Evento</p>
                 <!-- 🎨 CAMBIAR: Hora de inicio y código de vestir -->
-                <p class="card-time">15:00 hrs · Código de Vestir: N/A</p>
+                <p class="card-time">6:30 hrs</p>
 
                 <div class="map-frame-small">
                     <!-- 🗺️ CAMBIAR MAPA SALÓN: Ve a Google Maps → Compartir → Insertar mapa → copia el src -->
@@ -280,6 +320,9 @@
                         <option value="2">2 Personas</option>
                         <option value="3">3 Personas</option>
                         <option value="4">4 Personas</option>
+                        <option value="5">5 Personas</option>
+                        <option value="6">6 Personas</option>
+                        <option value="7">7 Personas</option>
                     </select>
                 </div>
 

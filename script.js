@@ -516,8 +516,8 @@ AOS.init({
 })();
 
 // =============================================
-// PARTÍCULAS SUAVES — SECCIÓN DETALLES (fondo crema rosado)
-// Copos/destellos rosa y dorado muy suaves, más pequeños y lentos
+// PARTÍCULAS SUAVES — SECCIÓN DETALLES (fondo crema dorado)
+// Copos/destellos crema y dorado muy suaves, más pequeños y lentos
 // =============================================
 (function initDetailsParticles() {
     const canvas = document.getElementById('detailsCanvas');
@@ -535,14 +535,14 @@ AOS.init({
 
     const COUNT = 55;
 
-    // 🎨 Partículas en tonos rosa, mauve y dorado muy suaves — armónicas con el fondo crema
+    // 🎨 Partículas en tonos crema y dorado muy suaves — armónicas con el fondo crema
     const COLORS = [
-        'rgba(190, 120, 140, ',   // rosa mauve
+        'rgba(247, 237, 200, ',   // champagne claro
         'rgba(201, 169, 110, ',   // dorado suave
-        'rgba(220, 150, 170, ',   // rosa palo
-        'rgba(180, 110, 130, ',   // mauve oscuro
-        'rgba(232, 195, 170, ',   // melocotón
-        'rgba(210, 160, 180, ',   // rosa grisáceo
+        'rgba(232, 213, 163, ',   // oro pálido
+        'rgba(216, 184, 122, ',   // dorado medio
+        'rgba(255, 250, 235, ',   // blanco cálido
+        'rgba(190, 155, 90,  ',   // dorado oscuro
     ];
 
     function spawnP(scattered) {
@@ -644,10 +644,10 @@ AOS.init({
 
     // 🎨 Tonos muy suaves casi transparentes sobre crema
     const COLORS = [
-        'rgba(158, 90, 106, ',    // rose gold primario
+        'rgba(169, 130, 46,  ',   // dorado profundo primario
         'rgba(201, 169, 110, ',   // dorado
-        'rgba(200, 140, 155, ',   // rosa medio
-        'rgba(180, 130, 100, ',   // dorado rosado
+        'rgba(232, 213, 163, ',   // oro pálido
+        'rgba(247, 237, 200, ',   // champagne claro
     ];
 
     function spawnP(scattered) {
@@ -798,7 +798,7 @@ function sendToWhatsapp(e) {
     const count = document.getElementById('guestCount').value;
 
     // 📱 CAMBIAR NÚMERO DE WHATSAPP AQUÍ:
-    const phoneNumber = "525559781006";
+    const phoneNumber = "525651247093";
 
     // 🎨 CAMBIAR MENSAJE: Personaliza el texto del WhatsApp
     const message =
