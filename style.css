@@ -1448,3 +1448,74 @@ select:focus {
     .time-separator { display: none; }
     #timer { gap: 12px; }
 }
+
+/* =============================================
+   🎵 BOTÓN DE MÚSICA (flotante)
+   ============================================= */
+.music-toggle {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 900;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-gold-light);
+    background: rgba(58, 44, 18, 0.72);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(201, 169, 110, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, background 0.3s, color 0.3s;
+}
+
+.music-toggle:hover {
+    transform: scale(1.08);
+    color: #fff;
+    background: rgba(169, 130, 46, 0.85);
+}
+
+.music-toggle .icon-muted { display: none; }
+.music-toggle.is-muted .icon-sound { display: none; }
+.music-toggle.is-muted .icon-muted { display: block; }
+
+/* =============================================
+   ALERTA DE AGRADECIMIENTO
+   ============================================= */
+.thanks-content {
+    text-align: center;
+    max-width: 440px;
+}
+
+.thanks-ornament {
+    margin: 0 auto 22px;
+    width: 180px;
+}
+
+.thanks-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--color-text);
+    margin-bottom: 16px;
+}
+
+.thanks-text em {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Indicación del último paso en la alerta de agradecimiento */
+.thanks-step {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    margin: 4px 0 14px;
+}

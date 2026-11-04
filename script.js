@@ -164,6 +164,71 @@
     setTimeout(dismissPreloader, 5000);
 })();
 
+
+// =============================================
+// 🎵 MÚSICA DE FONDO
+// Intenta reproducirse sola al entrar. Como los navegadores bloquean el
+// audio automático, si no puede, arranca con el primer toque/clic/tecla.
+// 🎵 CAMBIAR VOLUMEN: modifica MUSIC_VOLUME (0.0 a 1.0)
+// 🎵 CAMBIAR CANCIÓN: edita el src del <audio id="bgMusic"> en index.html
+// =============================================
+(function initMusic() {
+    const audio  = document.getElementById('bgMusic');
+    const toggle = document.getElementById('musicToggle');
+    if (!audio) return;
+
+    const MUSIC_VOLUME = 0.5;
+    audio.volume = MUSIC_VOLUME;
+
+    let userMuted = false;
+
+    function updateIcon() {
+        if (toggle) toggle.classList.toggle('is-muted', audio.paused || userMuted);
+    }
+
+    function tryPlay() {
+        if (userMuted) return Promise.resolve();
+        return audio.play().then(updateIcon).catch(() => { updateIcon(); });
+    }
+
+    // Intento directo (funciona en algunos navegadores)
+    tryPlay();
+
+    // Respaldo: primer gesto del usuario
+    const events = ['click', 'touchend', 'keydown', 'pointerdown'];
+    function onFirstInteraction() {
+        tryPlay().then(() => {
+            if (!audio.paused) {
+                events.forEach(ev => document.removeEventListener(ev, onFirstInteraction));
+            }
+        });
+    }
+    events.forEach(ev => document.addEventListener(ev, onFirstInteraction));
+
+    // Botón silenciar / activar
+    if (toggle) {
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (audio.paused || userMuted) {
+                userMuted = false;
+                audio.play().then(updateIcon).catch(updateIcon);
+            } else {
+                userMuted = true;
+                audio.pause();
+                updateIcon();
+            }
+        });
+    }
+
+    // Pausar si se cambia de pestaña, reanudar al volver
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) audio.pause();
+        else if (!userMuted) tryPlay();
+    });
+
+    updateIcon();
+})();
+
 // =============================================
 // INICIALIZACIÓN DE AOS (Animaciones al scroll)
 // =============================================
@@ -810,8 +875,32 @@ function sendToWhatsapp(e) {
 
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-    window.open(url, '_blank');
-    closeModal();
+    // Guardamos el enlace: WhatsApp se abre desde la alerta de agradecimiento
+    pendingWhatsappUrl = url;
 
+    closeModal();
     document.getElementById('rsvpForm').reset();
+
+    // Primero mostramos la alerta de agradecimiento
+    openThanks();
+}
+
+// =============================================
+// ALERTA DE AGRADECIMIENTO (se muestra ANTES de abrir WhatsApp)
+// Solo se cierra con el botón "Continuar a WhatsApp", para que
+// nadie la cierre sin enviar su confirmación.
+// =============================================
+const thanksModal = document.getElementById('thanksModal');
+let pendingWhatsappUrl = '';
+
+function openThanks() {
+    thanksModal.classList.add('show-modal');
+    document.body.style.overflow = 'hidden';
+}
+
+function continueToWhatsapp() {
+    if (pendingWhatsappUrl) window.open(pendingWhatsappUrl, '_blank');
+    pendingWhatsappUrl = '';
+    thanksModal.classList.remove('show-modal');
+    document.body.style.overflow = '';
 }
